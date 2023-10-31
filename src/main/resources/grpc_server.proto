@@ -1,0 +1,18 @@
+syntax="proto3";
+option java_package="org.example.grpc_stubs";
+
+service GrpcServer{
+    rpc DashbordMachines(DashbordRequest) returns  (DashbordResponse);
+}
+
+message DashbordRequest{
+  string ref=1;
+  string marque=2;
+  double prix=3;
+}
+
+message DashbordResponse{
+      string ref=1;
+      string marque=2;
+      double prix=3;
+}
