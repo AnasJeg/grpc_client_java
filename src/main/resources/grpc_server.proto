@@ -1,18 +1,15 @@
 syntax="proto3";
 option java_package="org.example.grpc_stubs";
 
-service GrpcServer{
-    rpc DashbordMachines(DashbordRequest) returns  (DashbordResponse);
+service Servertest{
+    rpc TerrainCalcul(TerrainRequest) returns  (TerrainResponse);
 }
 
-message DashbordRequest{
-  string ref=1;
-  string marque=2;
-  double prix=3;
+message TerrainRequest{
+  double surface=1;
+  double taux=2;
 }
 
-message DashbordResponse{
-      string ref=1;
-      string marque=2;
+message TerrainResponse{
       double prix=3;
 }
