@@ -22,7 +22,8 @@ public class ClientFour {
                 newStub.fullStreamTerrainCalcul(new StreamObserver<GrpcServer.TerrainResponse>() {
                     @Override
                     public void onNext(GrpcServer.TerrainResponse value) {
-                        System.out.println("value == " + value.getPrix());
+                        System.out.println("Label = "+ value.getLabel());
+                        System.out.println("Prix = " + value.getPrix());
                     }
 
                     @Override

@@ -5,7 +5,6 @@ service Servertest{
     rpc TerrainCalcul(TerrainRequest) returns  (TerrainResponse);
     rpc ClientStreamTerrainCalcul(stream TerrainRequest) returns (TerrainResponse);
     rpc fullStreamTerrainCalcul(stream TerrainRequest) returns (stream TerrainResponse);
-
 }
 
 message TerrainRequest{
@@ -15,6 +14,6 @@ message TerrainRequest{
 }
 
 message TerrainResponse{
-  string label=1;
+      string label=1;
       double prix=2;
 }

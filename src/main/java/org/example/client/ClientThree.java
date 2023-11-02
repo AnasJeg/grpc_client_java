@@ -6,11 +6,12 @@ import io.grpc.stub.StreamObserver;
 import org.example.grpc_stubs.GrpcServer;
 import org.example.grpc_stubs.ServertestGrpc;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ClientThree {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         //asyn
         ManagedChannel managedChannel= ManagedChannelBuilder.forAddress("localhost",5050)
                 .usePlaintext()
@@ -22,7 +23,7 @@ public class ClientThree {
                 .setTaux(0.15)
                 .build();
 
-        StreamObserver<GrpcServer.TerrainRequest> onCompleted =
+        StreamObserver<GrpcServer.TerrainRequest> clientStreamTerrainCalcul =
                 newStub.clientStreamTerrainCalcul(new StreamObserver<GrpcServer.TerrainResponse>() {
                     @Override
                     public void onNext(GrpcServer.TerrainResponse value) {
@@ -50,17 +51,23 @@ public class ClientThree {
                         .setSurface(80)
                         .setTaux(0.15)
                         .build();
-                onCompleted.onNext(terrainRequest);
+                clientStreamTerrainCalcul.onNext(terrainRequest);
                 counter ++;
                 System.out.println("request : "+counter);
                 System.out.println("terrainRequest : "+terrainRequest.getLabel()+" "
                         +terrainRequest.getSurface()+" "+terrainRequest.getTaux());
                 if(counter==5){
-                    onCompleted.onCompleted();
+                    clientStreamTerrainCalcul.onCompleted();
                     timer.cancel();
                 }
             }
         }, 1000, 1000);
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        managedChannel.shutdown();
     }
 }

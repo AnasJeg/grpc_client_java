@@ -8,7 +8,6 @@ import org.example.grpc_stubs.ServertestGrpc;
 
 public class GrpcClient {
     public static void main(String[] args) {
-        //sync
         ManagedChannel managedChannel= ManagedChannelBuilder.forAddress("localhost",5050)
                 .usePlaintext()
                 .build();
